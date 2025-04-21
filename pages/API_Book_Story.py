@@ -62,7 +62,6 @@ if submit_button:
         try:
             with st.spinner("APIリクエスト中です…"):
                 response = requests.post(url, json=payload)
-            response = requests.post(url, json=payload)
             if response.status_code == 200:
                 # JSON形式でレスポンスを取得
                 result = response.json()
