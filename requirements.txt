@@ -4,3 +4,4 @@ openai
 Pillow
 requests
 streamlit
+streamlit-3d
