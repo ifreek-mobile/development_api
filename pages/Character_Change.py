@@ -26,7 +26,7 @@ def translate_prompt_to_english(text: str) -> str:
 
 
 def main():
-    st.title("画像 → 画像生成 / お人形風に変換")
+    st.title("画像→画像生成 / お人形風に変換")
 
     with st.form("plushify_form"):
         image_file = st.file_uploader("画像をアップロード", type=["png", "jpg", "jpeg"])
