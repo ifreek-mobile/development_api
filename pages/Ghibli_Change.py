@@ -5,7 +5,7 @@ import imghdr  # 画像形式判定用
 
 
 def main():
-    st.title("画像→画像生成 / ジブリ風スタイル変換")
+    st.title("画像→画像生成 / ジブリ風スタイル変換デモ")
 
     # 画像アップロードだけのフォーム
     with st.form("plushify_form"):
