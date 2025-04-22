@@ -32,7 +32,7 @@ def translate_prompt_to_english(text: str) -> str:      # ★③ 追加
 # ───────────────────────────────────
 # 1. UI
 # ───────────────────────────────────
-st.title("3Dモデル変換 / 画像→3D生成デモ")
+st.title("画像→3D / 3Dモデル生成デモ")
 
 prompt_ja = st.text_input("プロンプト（日本語入力可）", "猫の着ぐるみを着た子ども")
 quality = st.selectbox("品質",     ["high", "medium", "low"], index=1)
