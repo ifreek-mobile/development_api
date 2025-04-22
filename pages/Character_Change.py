@@ -30,7 +30,7 @@ def main():
 
     with st.form("plushify_form"):
         image_file = st.file_uploader("画像をアップロード", type=["png", "jpg", "jpeg"])
-        prompt = st.text_input("プロンプト", value="", help="未入力なら空文字が送信されます。")
+        prompt = st.text_input("プロンプト", value="猫の姿をしている", help="未入力なら空文字が送信されます。")
         submit = st.form_submit_button("▶️ 生成開始")
 
     if not submit:
