@@ -33,6 +33,11 @@ def translate_prompt_to_english(text: str) -> str:
 # 1. UI
 # -------------------------------------------------------
 st.set_page_config(page_title="HiDream I1 画像生成", page_icon="🖼️")
+with st.expander("✏️ 補足情報の表示（クリックで展開）", expanded=False):
+    st.write("""
+    - 1 回の画像生成あたり約 8 円です。
+    - 日本語のプロンプトの入力が可能で、裏でイラスト風に生成されるようにプロンプト調整
+    """)
 st.title("テキスト→画像 / 最新モデル画像生成デモ")
 
 with st.sidebar:

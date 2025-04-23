@@ -11,7 +11,11 @@ client = OpenAI()
 
 
 def translate_prompt_to_english(text: str) -> str:
-    """日本語のプロンプトを英語に翻訳して返します。空文字ならそのまま返却。"""
+    """
+    日本語のプロンプトを英語に翻訳して返します。
+    - text が空文字なら、翻訳処理をスキップしてそのまま空文字を返却します。
+    - 文字列がある場合のみ GPT-4.1 Nano に問い合わせます。
+    """
     if not text:
         return ""
     resp = client.chat.completions.create(
@@ -26,18 +30,37 @@ def translate_prompt_to_english(text: str) -> str:
 
 
 def main():
-    st.title("画像→画像生成 / お人形風に変換デモ")
+    # ——— 補足情報表示セクション ———
+    # ここでは「生成コスト」「使い方のヒント」などを非表示状態から展開して
+    # 必要に応じて確認できるようにしています。
+    with st.expander("✏️ 補足情報の表示（クリックで展開）", expanded=False):
+        st.write("""
+        - 1 回の画像生成あたり約 15 円です。
+        - 日本語でプロンプトの入力が可能ですが、送信時に自動的に英訳されます。
+        - プロンプトみ入力でもOK
+        """)
+    # ————————————————————————
+
+    st.title("お人形風に変換 / 画像→画像生成")
 
     with st.form("plushify_form"):
-        image_file = st.file_uploader("画像をアップロード", type=["png", "jpg", "jpeg"])
-        prompt = st.text_input("プロンプト", value="猫の姿をしている", help="未入力なら空文字が送信されます。")
+        image_file = st.file_uploader(
+            "画像をアップロード", type=["png", "jpg", "jpeg"],
+            help="生成したい写真やイラストをアップロードしてください。"
+        )
+        prompt = st.text_input(
+            "プロンプト（日本語）",
+            value="猫の姿をしている",
+            help="未入力の場合は空文字が渡され、翻訳はスキップされます。"
+        )
         submit = st.form_submit_button("▶️ 生成開始")
 
     if not submit:
         return
 
-    # 追加：翻訳関数を呼び出して英語プロンプトを生成
+    # プロンプトが空文字なら ""、そうでなければ英訳を実行
     translated_prompt = translate_prompt_to_english(prompt)
+    # デバッグ用ログ（CLI やコンテナのログに出力されます）
     print(f"Translated Prompt: {translated_prompt}")
 
     logs_placeholder = st.empty()
@@ -47,6 +70,7 @@ def main():
             for log in update.logs:
                 logs_placeholder.text(log["message"])
 
+    # 画像データを base64 に変換
     if image_file:
         image_bytes = image_file.read()
         img_type = imghdr.what(None, h=image_bytes)
@@ -57,17 +81,19 @@ def main():
         image_url = ""
 
     with st.spinner("処理中…"):
+        # fal-ai/plushify API に送信
         result = fal_client.subscribe(
             "fal-ai/plushify",
             arguments={
                 "image_url": image_url,
-                "prompt": translated_prompt,  # 翻訳後のプロンプトを渡す
+                "prompt": translated_prompt,
                 "enable_safety_checker": False,
             },
             with_logs=True,
             on_queue_update=on_queue_update,
         )
 
+    # 生成結果の表示
     images = result.get("images", [])
     if images:
         st.success("画像生成が完了しました！")

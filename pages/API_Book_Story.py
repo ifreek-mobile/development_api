@@ -4,6 +4,13 @@ import base64
 from PIL import Image
 import io
 
+with st.expander("✏️ 補足情報の表示（クリックで展開）", expanded=False):
+    st.write("""
+    - 初回のリクエストでは+30秒程の遅延が発生します。
+    - 生成の時間は1分から3分程度かかります。
+    - リクエストに失敗することがありますが、再度実行すると上手くいく場合があります。
+    """)
+
 # タイトル表示
 st.title("絵本イラスト&ストーリー作成")
 
