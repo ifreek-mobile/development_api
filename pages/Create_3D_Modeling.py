@@ -36,7 +36,7 @@ st.title("画像→3D / 3Dモデル生成デモ")
 
 prompt_ja = st.text_input("プロンプト（日本語入力可）", "猫の着ぐるみを着た子ども")
 quality = st.selectbox("品質",     ["high", "medium", "low"], index=1, help="high: 高品質、medium: 中品質、low: 低品質")
-material = st.selectbox("マテリアル", ["PBR", "Shaded"], index=0, help="PBR: リアリスティックな質感・物理ベース表現、Shaded: 軽量レンダリング・シンプルな陰影表現)
+material = st.selectbox("マテリアル", ["PBR", "Shaded"], index=0, help="PBR: リアリスティックな質感・物理ベース表現、Shaded: 軽量レンダリング・シンプルな陰影表現")
 
 uploaded_imgs = st.file_uploader(
     "参照画像（複数可、推奨: マルチビュー）",
