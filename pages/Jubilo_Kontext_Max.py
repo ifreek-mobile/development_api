@@ -156,14 +156,14 @@ PRESET_IMAGE_URLS = resolve_preset_urls(PRESET_IMAGES)
 ###############################################################################
 # UI
 ###############################################################################
-st.set_page_config(page_title="ジュビロ用画像生成", page_icon="🖼️")
+st.set_page_config(page_title="ジュビロ磐田-画像生成", page_icon="🖼️")
 with st.expander("✏️ 補足情報の表示（クリックで展開）", expanded=False):
     st.write("""
     - 1 回の画像生成あたり約 12 円です。
     - 画像と性別、生成スタイルを選択して「生成する」を押すと、画像が生成されます。
     - 生成された画像はダウンロードできます。
     """)
-st.title("画像生成デモ (fal.ai Kontext Max)")
+st.title("ジュビロ画像生成デモ")
 
 uploaded_file = st.file_uploader(
     "顔画像をアップロード", type=["jpg", "jpeg", "png", "webp"])
