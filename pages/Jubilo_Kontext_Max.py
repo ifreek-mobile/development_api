@@ -163,7 +163,7 @@ with st.expander("✏️ 補足情報の表示（クリックで展開）", expa
     - 画像と性別、生成スタイルを選択して「生成する」を押すと、画像が生成されます。
     - 生成された画像はダウンロードできます。
     """)
-st.title("ジュビロ画像生成デモ")
+st.title("ジュビロ磐田-画像生成デモ")
 
 uploaded_file = st.file_uploader(
     "顔画像をアップロード", type=["jpg", "jpeg", "png", "webp"])
